@@ -1,0 +1,15 @@
+{
+  "name": "registration-service",
+  "version": "1.0.0",
+  "description": "Registration microservice for travel booking app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3"
+  }
+}

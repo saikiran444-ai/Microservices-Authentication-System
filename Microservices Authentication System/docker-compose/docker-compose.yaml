@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  login-service:
+    build: ./login-service
+    ports:
+      - "8081:8081"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/travel_db
+      - JWT_SECRET=your_jwt_secret
+    depends_on:
+      - mongo
+    networks:
+      - travel-network
+
+  registration-service:
+    build: ./registration-service
+    ports:
+      - "8082:8082"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/travel_db
+    depends_on:
+      - mongo
+    networks:
+      - travel-network
+
+  change-password-service:
+    build: ./change-password-service
+    ports:
+      - "8083:8083"
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/travel_db
+      - JWT_SECRET=your_jwt_secret
+    depends_on:
+      - mongo
+    networks:
+      - travel-network
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - travel-network
+
+networks:
+  travel-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
